@@ -1,0 +1,172 @@
+lib.pageid = TEXT
+lib.pageid.data = page:uid
+
+lib.blogid = TEXT
+lib.blogid.value < plugin.tx_blog.settings.blogUid
+
+lib.metaData = USER
+lib.metaData {
+    userFunc = T3G\AgencyPack\Blog\UserFunc\MetaService->get
+}
+
+lib.canoncicalUrl = TEXT
+lib.canoncicalUrl {
+    typolink.parameter.data = TSFE:id
+    typolink.returnLast = url
+    typolink.forceAbsoluteUrl = 1
+    typolink.addQueryString = 1
+    typolink.addQueryString.method = GET
+    typolink.addQueryString.exclude = {$plugin.tx_typo3kb.canoncicalExcludeParams}
+    stdWrap.override.cObject < lib.metaData
+    stdWrap.override.cObject {
+        key = url
+    }
+}
+
+config {
+    tx_realurl_enable = 1
+    absRefPrefix = auto
+}
+
+blog = PAGE
+blog {
+    config.noPageTitle = 2
+    headerData {
+        # title tag
+        10 = TEXT
+        10.data = page:title // page:navtitle
+        10.stdWrap.override.cObject < lib.metaData
+        10.stdWrap.override.cObject {
+            key = title
+        }
+        10.wrap = <title>|</title>
+        # meta description
+        20 = TEXT
+        20.data = page:description
+        20.stdWrap.override.cObject < lib.metaData
+        20.stdWrap.override.cObject {
+            key = description
+        }
+        20.wrap = <meta name="description" content="|" />
+        30 = TEXT
+        30.value < lib.canoncicalUrl
+        30.wrap = <link rel="canonical" href="|" />
+        # OG-Tags
+        110 = TEXT
+        110.value = de_DE
+        110.wrap = <meta property="og:locale" content="|" />
+        120 = TEXT
+        120.value = article
+        120.wrap = <meta property="og:type" content="|" />
+        130 = TEXT
+        130.data = page:title // page:navtitle
+        130.stdWrap.override.cObject < lib.metaData
+        130.stdWrap.override.cObject {
+            key = title
+        }
+        130.wrap = <meta property="og:title" content="|" />
+        140 = TEXT
+        140.data = page:description
+        140.stdWrap.override.cObject < lib.metaData
+        140.stdWrap.override.cObject {
+            key = description
+        }
+        140.wrap = <meta property="og:description" content="|" />
+        150 = TEXT
+        150.value < lib.canoncicalUrl
+        150.wrap = <meta property="og:url" content="|" />
+        160 = TEXT
+        160.value < sitetitle
+        160.wrap = <meta property="og:site_name" content="|" />
+        170 = TEXT
+        170.data = page:tstamp
+        170.date = c
+        170.stdWrap.override.cObject < lib.metaData
+        170.stdWrap.override.cObject {
+            key = modified_date
+        }
+        170.wrap = <meta property="og:updated_time" content="|" />
+
+        # Article tags
+#        210 = TEXT
+#        210.value = https://www.authorurl.rl
+#        210.wrap = <meta property="article:author" content="|" />
+#        # TODO: tags is an array, we need one <meta> tag per item
+#        220 < lib.metaData
+#        220 {
+#            key = tags
+#            stdWrap.wrap = <meta property="article:tag" content="|" />
+#        }
+#        # TODO: categories is an array, we need one <meta> tag per item
+#        230 < lib.metaData
+#        230 {
+#            key = categories
+#            stdWrap.wrap = <meta property="article:section" content="|" />
+#        }
+        240 = TEXT
+        240.data = page:crdate
+        240.date = c
+        240.stdWrap.override.cObject < lib.metaData
+        240.stdWrap.override.cObject {
+            key = published_date
+        }
+        240.wrap = <meta property="article:published" content="|" />
+        250 = TEXT
+        250.data = page:tstamp
+        250.date = c
+        250.stdWrap.override.cObject < lib.metaData
+        250.stdWrap.override.cObject {
+            key = modified_date
+        }
+        250.wrap = <meta property="article:modified" content="|" />
+
+        # Twitter cards
+        310 = TEXT
+        310.value = <meta name="twitter:card" content="summary" />
+        320 = TEXT
+        320.data = page:description
+        320.stdWrap.override.cObject < lib.metaData
+        320.stdWrap.override.cObject {
+            key = description
+        }
+        320.wrap = <meta property="twitter:description" content="|" />
+        330 = TEXT
+        330.data = page:title // page:navtitle
+        330.stdWrap.override.cObject < lib.metaData
+        330.stdWrap.override.cObject {
+            key = title
+        }
+        330.wrap = <meta property="twitter:title" content="|" />
+        340 = TEXT
+        340.value = {$plugin.tx_typo3kb.twitter.site}
+        340.wrap = <meta property="twitter:site" content="|" />
+        350 = TEXT
+        350.value = {$plugin.tx_typo3kb.twitter.creator}
+        350.wrap = <meta property="twitter:creator" content="|" />
+    }
+    includeCSS {
+        bootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+        bootstrap.external = 1
+        bootstrap_theme = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css
+        bootstrap_theme.external = 1
+        theme = EXT:typo3kb/Resources/Public/Css/theme.css
+    }
+    includeJS {
+        jquery = //ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js
+        jquery.external = 1
+        bootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
+        bootstrap.external = 1
+    }
+    10 = FLUIDTEMPLATE
+    10 {
+        file = EXT:typo3kb/Resources/Private/Template.html
+        partialRootPath = EXT:typo3kb/Resources/Private/Partials/
+        layoutRootPath = EXT:typo3kb/Resources/Private/Layouts/
+    }
+}
+
+# =====================================
+# Load Shariff files incl. font-awesome
+# =====================================
+blog.includeJSFooter.tx_rxshariff_shariff = EXT:rx_shariff/Resources/Public/JavaScript/shariff.min.js
+blog.includeCSS.tx_rxshariff_shariff = EXT:rx_shariff/Resources/Public/Css/shariff.complete.css

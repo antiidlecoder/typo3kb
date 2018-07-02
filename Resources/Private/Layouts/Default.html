@@ -1,0 +1,32 @@
+<div class="container" xmlns:f="http://www.w3.org/1999/html" xmlns:rx="http://typo3.org/ns/Reelworx/RxShariff/ViewHelper">
+    <div class="row">
+        <div class="col-md-4">
+
+            <f:cObject typoscriptObjectPath="tt_content.list.20.blog_category" />
+            <f:cObject typoscriptObjectPath="tt_content.list.20.blog_tag" />
+
+        </div>
+        <div class="col-md-8">
+            <f:if condition="{f:cObject(typoscriptObjectPath: 'lib.pageid')} == {f:cObject(typoscriptObjectPath: 'lib.blogid')}">
+                <f:then>
+                    <f:comment>This shows the listings, category pages, etc.</f:comment>
+                    <f:render section="content" />
+                </f:then>
+                <f:else>
+                    <f:comment>This shows a single blog post.</f:comment>
+                    <f:cObject typoscriptObjectPath="plugin.tx_blog.pageInfo.title" />
+                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_meta" />
+                    <f:if condition="{f:cObject(typoscriptObjectPath: 'lib.blog.pageInfo.sharingEnabled')} == 1">
+                        <div class="entry-sharing">
+                        <rx:shariff services="twitter, facebook, googleplus" enableBackend="true" />
+                        </div>
+                    </f:if>
+                    <f:render section="content" />
+                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_authors" />
+                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_comments" />
+                    <f:cObject typoscriptObjectPath="tt_content.list.20.blog_commentform" />
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+.entry-meta {
+	margin: 0 0 1rem 0;
+	padding: 0 0 1rem 0;
+	border-bottom: 1px solid #333;
+}
+
+.entry-sharing {
+	margin: 0 0 1rem 0;
+	padding: 0 0 0.5rem 0;
+	border-bottom: 1px solid #333;
+}
+
+.label-category {
+	background-color: #777;
+}
+
+.label-tag {
+	background-color: #777;
+	margin-right: 0.5rem;
+}
+
+.author-box-intro {
+	margin-top: 15px;
+}
+
+.author-title {
+	display: block;
+	font-size: 80%;
+	margin-top: 0.5rem;
+}
+
+a.author-social-link.small {
+	margin-left: 5px;
+}
+
+a.author-social-link.small:hover .fa {
+	color: #000;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+	.center-block {
+		margin: 0 auto;
+	}
+
+	.author-box {
+		text-align: center;
+	}
+
+	.author-social-links {
+		text-align: center;
+		display: block;
+		margin-top: 10.5px;
+	}
+}
+
+

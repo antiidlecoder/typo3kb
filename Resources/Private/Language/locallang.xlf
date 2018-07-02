@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-04T17:14:25Z" product-name="typo3kb">
+		<header/>
+		<body>
+			<trans-unit id="blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="twitter" xml:space="preserve">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="global" xml:space="preserve">
+				<source>Global settings</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
