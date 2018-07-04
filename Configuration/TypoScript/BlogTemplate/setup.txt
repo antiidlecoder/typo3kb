@@ -1,7 +1,10 @@
-plugin.tx_blog.view {
-        templateRootPaths.10 = EXT:typo3kb/Resources/Private/Ext/blog/Templates/
-        partialRootPaths.10 = EXT:typo3kb/Resources/Private/Ext/blog/Partials/
-        layoutRootPaths.10 = EXT:typo3kb/Resources/Private/Ext/blog/Layouts/
+plugin.tx_blog {
+    templateRootPaths >
+    view {
+        templateRootPaths.30 = EXT:typo3kb/Resources/Private/Ext/blog/Templates/
+        partialRootPaths.30 = EXT:typo3kb/Resources/Private/Ext/blog/Partials/
+        layoutRootPaths.30 = EXT:typo3kb/Resources/Private/Ext/blog/Layouts/
+    }
 }
 
 lib.pageid = TEXT
@@ -151,17 +154,18 @@ blog {
         350.wrap = <meta property="twitter:creator" content="|" />
     }
     includeCSS {
-        bootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
-        bootstrap.external = 1
-        bootstrap_theme = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css
-        bootstrap_theme.external = 1
-        theme = EXT:typo3kb/Resources/Public/Css/theme.css
+        fa5 = https://use.fontawesome.com/releases/v5.1.0/css/all.css
+        fa5.external = 1
+        style = EXT:typo3kb/Resources/Public/Css/Style.min.css
     }
-    includeJS {
-        jquery = //ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js
-        jquery.external = 1
-        bootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
-        bootstrap.external = 1
+    includeJSFooter {
+        jQuery = https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
+        jQuery.external = 1
+        isotope = https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js
+        isotope.external = 1
+        packery = //npmcdn.com/isotope-packery@2/packery-mode.pkgd.js
+        packery.external = 1
+        main = EXT:typo3kb/Resources/Public/JavaScript/main.js
     }
     10 = FLUIDTEMPLATE
     10 {

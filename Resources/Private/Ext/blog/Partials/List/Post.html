@@ -1,0 +1,20 @@
+{namespace blog=T3G\AgencyPack\Blog\ViewHelpers}
+<div class="post shuffle-item {f:if(condition: i.isLast, then: '{category.title}', else: '{category.title} ') -> f:for(each:'{post.categories}', as: 'category', iteration: 'i')}">
+    <h2 itemprop="name"><blog:link.post post="{post}" /></h2>
+    <f:if condition="{post.abstract}">
+        <f:then>
+            <p itemprop="description">{post.abstract}</p>
+        </f:then>
+        <f:else>
+            <p itemprop="description">{post.description}</p>
+        </f:else>
+    </f:if>
+    <f:render partial="Post/Meta" arguments="{_all}" />
+</div>
+
+
+
+
+<f:comment>
+  {f:if(condition: i.isLast, then: '{category.title}', else: '{category.title} ') -> f:for(each:'{post.categories}', as: 'category', iteration: 'i')}
+</f:comment>
